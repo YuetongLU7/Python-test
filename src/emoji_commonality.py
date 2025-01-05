@@ -18,14 +18,12 @@ def emoji_commonality(name_both: str = 'both', top_k: int = 5, figsize=(12, 12))
         d1_count = dct['d1']
         d2_count = dct['d2']
 
-    # 计算共有性
     common_df = calc_commonality(d1_count, d2_count)
     if 'commonality' not in common_df.columns:
         raise KeyError("common_df 缺少 'commonality' 列，请检查数据来源。")
 
-    # 排序并限制 top_k
     common_df.sort_values(by='commonality', ascending=False, inplace=True)
-    top_k = min(top_k, common_df.shape[0])  # 确保 top_k 不超出行数
+    top_k = min(top_k, common_df.shape[0])
     print(f'top_k should not exceed{common_df.shape[0]}')
 
     # 获取绘图数据
@@ -43,18 +41,16 @@ def emoji_commonality(name_both: str = 'both', top_k: int = 5, figsize=(12, 12))
     plt.xlabel('emoji共有性', fontsize=20)
     plt.ylabel('emoji', fontsize=20)
     plt.title(f'{name_both} Top {top_k} emojis', fontsize=20)
-    # 保存中文图像
+
     plt.savefig(f'figs/{name_both} emoji commonality(zh).png')
     print(f'The Chinese version has been saved as: figs/{name_both} emoji commonality (zh).png')
 
-    # 翻译所有需要的文本
     xlabel = translate_to_french('emoji共有性')
     ylabel = translate_to_french('emoji')
     title = translate_to_french(f'{name_both} Top {top_k} emojis')
 
     print(f"French translation: xlabel={xlabel}, ylabel={ylabel}, title={title}")
 
-    # 绘制法语版本
     plt.close('all')
     plt.figure(1, figsize=figsize)
     plt.barh(y, common_values, color='C2')
@@ -62,7 +58,7 @@ def emoji_commonality(name_both: str = 'both', top_k: int = 5, figsize=(12, 12))
     plt.xlabel(xlabel, fontsize=20)
     plt.ylabel(ylabel, fontsize=20)
     plt.title(title, fontsize=20)
-    # 保存法语图像
+
     plt.savefig(f'figs/{name_both} emoji commonality(fr).png')
     print(f'The French version has been saved as: figs/{name_both} emoji commonality (fr).png')
     print('=' * 20)

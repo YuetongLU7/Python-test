@@ -10,3 +10,5 @@ config.ini
 ​
 # Package Files 不需要提交的任意包含后缀名为jar的文件
 *.jar
+
+/src/input_data/test.csv

@@ -19,7 +19,7 @@ def makeWC(data: list, name: str,
     count_res = [(key, val) for key, val in wordCounter.most_common()]
     wordcloud = (
         WordCloud()
-        .add("", data_pair=count_res[:150], word_size_range=[15, 80], mask_image=bg_img,
+        .add("", data_pair=count_res[:150], word_size_range=[15, 80], mask_image=bg_img,   #Définir la plage de tailles de police
              textstyle_opts=opts.TextStyleOpts(font_family='Microsoft YaHei', font_weight='bold'))
         .set_global_opts(title_opts=opts.TitleOpts(
             title=f'{name}Word Cloud',

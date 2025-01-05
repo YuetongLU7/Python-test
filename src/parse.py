@@ -5,11 +5,6 @@ from utils import contains
 from tqdm import tqdm
 from re import findall
 
-"""
-parse对消息进行分词。会分出词语和表情两列。
-生成keywords.csv文件作为输出。
-"""
-
 
 def parse(msg_file='msg.csv', emoji_file='emoji.txt',
           stopword_file='stopwords_hit_modified.txt',
@@ -18,7 +13,7 @@ def parse(msg_file='msg.csv', emoji_file='emoji.txt',
     print('开始分词')
     records = pd.read_csv(
         f'input_data/{msg_file}', usecols=['IsSender', 'StrContent', 'StrTime']).dropna(how='any')
-    # 如果有一条消息是乱码或者纯数字，直接删除之
+    # Filtrez les messages indésirables
     not_want_msg = ['<.+',  # 如<msg，<?xml
                     '^\d{1,}$'  # 纯数字，如验证码
                     ]

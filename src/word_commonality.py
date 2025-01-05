@@ -12,7 +12,7 @@ def translate_to_french(text: str):
 
 
 def word_commonality(name_both: str = 'both', top_k: int = 25, figsize=(10, 12)):
-    print('计算word_commonality')
+    print('Calculate word_commonality')
     with open('temp_files/keyword_count.pkl', 'rb') as pf:
         dct = pickle.load(pf)
         d1_kw = dct['d1']
@@ -44,7 +44,7 @@ def word_commonality(name_both: str = 'both', top_k: int = 25, figsize=(10, 12))
     plt.barh(y, common_df.iloc[:top_k, 3], color='C2')
     plt.yticks(y, [translate_to_french(label) for label in common_df.iloc[:top_k, 0].tolist()])
     plt.xlabel(xlabel, fontsize=20)
-    plt.ylabel(ylabel, fontsize=20)
+    plt.ylabel(ylabel, fontsize=30)
     plt.title(title, fontsize=20)
     plt.savefig(f'figs/{name_both} word commonality(fr).png')
 
